@@ -73,7 +73,7 @@ endif()
 
 # Initialize CXXFLAGS.
 if("${CMAKE_VERSION}" VERSION_GREATER 3.1.0)
-  set(CMAKE_CXX_STANDARD 11)
+  set(CMAKE_CXX_STANDARD 17)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
 else()
   set(CMAKE_CXX_FLAGS                "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -104,7 +104,7 @@ if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU" OR "${CMAKE_CXX_COMPILER_ID}" MATCHE
     if(NOT (GCC_VERSION VERSION_GREATER 5.0 OR GCC_VERSION VERSION_EQUAL 5.0))
         message(FATAL_ERROR "${PROJECT_NAME} requires g++ 5.0 or greater.")
     endif ()
-elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" AND ANDROID) 
+elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" AND ANDROID)
 	# Need -Os cflag and cxxflags here to work with exception handling on armeabi.
 	# see  https://github.com/android-ndk/ndk/issues/573
 	# and without -stdlib=libc++ cxxflags
@@ -121,7 +121,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang" AND ( CMAKE_SYSTEM_NAME MATCH
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     endif()
 elseif(MSVC_VERSION GREATER 1800 OR MSVC_VERSION EQUAL 1800)
-  # Visual Studio 2012+ supports c++11 features 
+  # Visual Studio 2012+ supports c++11 features
 else ()
     message(FATAL_ERROR "Your C++ compiler does not support C++11.")
 endif()
@@ -150,7 +150,7 @@ if (ANTLR4_INSTALL)
 
   set(ANTLR4_LIB_DIR ${CMAKE_INSTALL_LIBDIR} CACHE STRING
       "Installation directory for libraries, relative to ${CMAKE_INSTALL_PREFIX}.")
-  
+
   set(ANTLR4_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/antlr4-runtime CACHE STRING
       "Installation directory for include files, relative to ${CMAKE_INSTALL_PREFIX}.")
 
@@ -158,18 +158,18 @@ if (ANTLR4_INSTALL)
     cmake/antlr4-runtime.cmake.in
     ${project_runtime_config}
     INSTALL_DESTINATION ${ANTLR4_CMAKE_DIR}
-    PATH_VARS 
+    PATH_VARS
     ANTLR4_INCLUDE_DIR
     ANTLR4_LIB_DIR )
-  
+
 configure_package_config_file(
     cmake/antlr4-generator.cmake.in
     ${project_generator_config}
     INSTALL_DESTINATION ${ANTLR4_CMAKE_DIR}
-    PATH_VARS 
+    PATH_VARS
     ANTLR4_INCLUDE_DIR
     ANTLR4_LIB_DIR )
-  
+
   write_basic_package_version_file(
     ${version_config}
     VERSION ${ANTLR_VERSION}
@@ -188,12 +188,12 @@ endif(ANTLR4_INSTALL)
 if(EXISTS LICENSE.txt)
 install(FILES LICENSE.txt
         DESTINATION "share/doc/libantlr4")
-elseif(EXISTS ../../LICENSE.txt) 
+elseif(EXISTS ../../LICENSE.txt)
 install(FILES ../../LICENSE.txt
     DESTINATION "share/doc/libantlr4")
 endif()
 
-install(FILES README.md VERSION 
+install(FILES README.md VERSION
     DESTINATION "share/doc/libantlr4")
 
 set(CPACK_PACKAGE_CONTACT "antlr-discussion@googlegroups.com")
